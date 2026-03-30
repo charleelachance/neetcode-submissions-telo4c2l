@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     constructor(val = 0, left = null, right = null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+    /**
+     * @param {TreeNode} root
+     * @param {TreeNode} subRoot
+     * @return {boolean}
+     */
+    isSubtree(root, subRoot) {    
+        if (!root) {
+            return false;
+        }    
+
+        function isSameTree(t1, t2) {
+            if (!t1 && !t2) {
+                return true;
+            } else if (!t1 || !t2) {
+                return false;
+            } else if (t1.val !== t2.val) {
+                return false;
+            }
+            return isSameTree(t1.left, t2.left) && isSameTree(t1.right, t2.right);
+        }
+
+        return isSameTree(root, subRoot) || this.isSubtree(root.left, subRoot) || this.isSubtree(root.right, subRoot); 
+    }
+}
